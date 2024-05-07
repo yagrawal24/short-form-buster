@@ -9,8 +9,8 @@ import OpenPage from './OpenPage';
 // Create a stack navigator
 const Stack = createStackNavigator();
 
-// Define the main App component
-export default function App() {
+// Define a component for handling the initial URL check and navigation
+const InitialURLHandler = () => {
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -24,9 +24,15 @@ export default function App() {
     });
   }, [navigation]); // Run this effect only once when the component mounts
 
+  return null; // This component doesn't render anything
+}
+
+// Define the main App component
+export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        <Stack.Screen name="InitialURLHandler" component={InitialURLHandler} options={{ headerShown: false }} />
         <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Setup" component={SetupScreen} options={{ headerShown: false }} />
         <Stack.Screen name="OpenPage" component={OpenPage} options={{ headerShown: false }} />
@@ -34,4 +40,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
